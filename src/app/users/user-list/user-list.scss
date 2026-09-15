@@ -1,0 +1,11 @@
+.user-list__avatar {
+  object-fit: cover;
+  background-color: var(--bs-secondary-bg);
+}
+
+.user-list__status-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 15%);
+}
