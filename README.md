@@ -1,5 +1,15 @@
 # Test technique Angular — Gestion d'utilisateurs
 
+## TODO
+
+- [x] Initialisation du repo et du projet
+- [x] Installation des modules complémentaires (NgBootstrap)
+- [ ] Popin d'édition d'un utilisateur
+- [ ] Bouton de suppression d'un utilisateur
+- [x] Page de détails d'un utilisateur
+- [x] Linter `npm run format:check`
+- [x] Tests `npm run test`
+
 Bienvenue, et merci du temps que vous consacrez à cet exercice.
 
 Le projet est un **Angular 22** fonctionnel : la liste des utilisateurs est déjà
