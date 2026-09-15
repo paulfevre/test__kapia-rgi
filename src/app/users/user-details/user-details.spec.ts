@@ -31,12 +31,13 @@ class UsersApiStub {
 
 describe("UserDetails", () => {
   const USER_ID = 9;
-  const USER_NAME = 'Loïc';
-  const USER_EMAIL = 'alequesne8@vkontakte.ru';
+  const USER_NAME = "Loïc";
+  const USER_EMAIL = "alequesne8@vkontakte.ru";
   const USER_AGE = 33;
-  const USER_AVATAR_URL = 'https://robohash.org/architectoestea.png?size=150x150&set=set1';
-  const USER_COLOR = '#1fb2cd';
-  const USER_STATE = '';
+  const USER_AVATAR_URL =
+    "https://robohash.org/architectoestea.png?size=150x150&set=set1";
+  const USER_COLOR = "#1fb2cd";
+  const USER_STATE = "";
 
   let fixture: ComponentFixture<UserDetails>;
   let usersApi: UsersApiStub;
@@ -47,7 +48,10 @@ describe("UserDetails", () => {
     TestBed.configureTestingModule({
       imports: [UserDetails],
       providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { params: { id: USER_ID } } } },
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { params: { id: USER_ID } } },
+        },
         { provide: UsersApi, useValue: usersApi },
       ],
     });
@@ -87,10 +91,16 @@ describe("UserDetails", () => {
     fixture.detectChanges();
 
     const root = fixture.nativeElement as HTMLElement;
-    expect(root.querySelector("h5.card-title")?.textContent?.trim()).toBe(USER_NAME);
+    expect(root.querySelector("h5.card-title")?.textContent?.trim()).toBe(
+      USER_NAME,
+    );
     expect(root.querySelector("li.active")?.textContent).toContain(USER_NAME);
-    expect(root.querySelector("li.active")?.textContent).toContain(`#${USER_ID}`);
-    expect(root.querySelector('a[href^="mailto:"]')?.getAttribute("href")).toBe(`mailto:${USER_EMAIL}`);
+    expect(root.querySelector("li.active")?.textContent).toContain(
+      `#${USER_ID}`,
+    );
+    expect(root.querySelector('a[href^="mailto:"]')?.getAttribute("href")).toBe(
+      `mailto:${USER_EMAIL}`,
+    );
     expect(root.textContent).toContain(`${USER_AGE} ans`);
   });
 
@@ -118,7 +128,7 @@ describe("UserDetails", () => {
 
     const root = fixture.nativeElement as HTMLElement;
     expect(root.querySelector('[role="alert"]')?.textContent).toContain(
-      "Impossible de charger l'utilisateur."
+      "Impossible de charger l'utilisateur.",
     );
     expect(root.querySelector(".card")).toBeNull();
 
@@ -135,9 +145,9 @@ describe("UserDetails", () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    (fixture.nativeElement.querySelector("button") as HTMLButtonElement).dispatchEvent(
-      new Event("click")
-    );
+    (
+      fixture.nativeElement.querySelector("button") as HTMLButtonElement
+    ).dispatchEvent(new Event("click"));
     fixture.detectChanges();
     usersApi.requestAt(1).next(userStub({ id: USER_ID }));
     usersApi.requestAt(1).complete();

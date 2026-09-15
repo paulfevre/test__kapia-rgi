@@ -1,4 +1,4 @@
-import type { User } from '../app/users/user';
+import type { User } from "../app/users/user";
 
 /**
  * Fabrique un utilisateur de test. Les champs non fournis prennent une valeur
@@ -7,12 +7,12 @@ import type { User } from '../app/users/user';
 export function userStub(overrides: Partial<User> = {}): User {
   return {
     id: 1,
-    name: 'Ada Lovelace',
-    email: 'ada@example.com',
+    name: "Ada Lovelace",
+    email: "ada@example.com",
     age: 36,
-    avatarUrl: 'https://example.test/ada.png',
-    color: '#0b1c2a',
-    state: 'London',
+    avatarUrl: "https://example.test/ada.png",
+    color: "#0b1c2a",
+    state: "London",
     ...overrides,
   };
 }

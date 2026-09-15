@@ -3,9 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": [
-      "@schematics/angular"
-    ]
+    "schematicCollections": ["@schematics/angular"]
   },
   "newProjectRoot": "projects",
   "projects": {

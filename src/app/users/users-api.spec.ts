@@ -1,14 +1,17 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-import { userStub } from '../../testing/user.stub';
-import { API_BASE_URL } from '../core/api-base-url';
-import type { User } from './user';
-import { UsersApi } from './users-api';
+import { provideHttpClient } from "@angular/common/http";
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
+import { userStub } from "../../testing/user.stub";
+import { API_BASE_URL } from "../core/api-base-url";
+import type { User } from "./user";
+import { UsersApi } from "./users-api";
 
-const BASE_URL = 'https://api.test';
+const BASE_URL = "https://api.test";
 
-describe('UsersApi', () => {
+describe("UsersApi", () => {
   let usersApi: UsersApi;
   let httpTesting: HttpTestingController;
 
@@ -29,14 +32,14 @@ describe('UsersApi', () => {
   // Échoue si une requête a été émise sans être consommée par le test.
   afterEach(() => httpTesting.verify());
 
-  it('appelle GET /users et transmet la liste reçue', () => {
+  it("appelle GET /users et transmet la liste reçue", () => {
     const expected = [userStub({ id: 1 }), userStub({ id: 2 })];
     let received: readonly User[] | undefined;
 
     usersApi.list().subscribe((users) => (received = users));
 
     const request = httpTesting.expectOne(`${BASE_URL}/users`);
-    expect(request.request.method).toBe('GET');
+    expect(request.request.method).toBe("GET");
 
     request.flush(expected);
     expect(received).toEqual(expected);

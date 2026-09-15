@@ -15,4 +15,4 @@ export interface User {
  * Champs modifiables d'un utilisateur : corps des requêtes `PUT`.
  * Dérivé de `User` pour que le modèle reste l'unique source de vérité.
  */
-export type UserDraft = Omit<User, 'id'>;
+export type UserDraft = Omit<User, "id">;

@@ -3,18 +3,18 @@ import {
   Component,
   computed,
   inject,
-} from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
+} from "@angular/core";
+import { rxResource } from "@angular/core/rxjs-interop";
 
-import type { User } from '../user';
-import { UsersApi } from '../users-api';
+import type { User } from "../user";
+import { UsersApi } from "../users-api";
 
 @Component({
-  selector: 'app-user-list',
+  selector: "app-user-list",
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
-  templateUrl: './user-list.html',
-  styleUrl: './user-list.scss',
+  templateUrl: "./user-list.html",
+  styleUrl: "./user-list.scss",
 })
 export class UserList {
   private readonly usersApi = inject(UsersApi);
@@ -33,7 +33,7 @@ export class UserList {
   protected readonly isLoading = this.usersResource.isLoading;
   protected readonly errorMessage = computed(() =>
     this.usersResource.error()
-      ? 'Impossible de charger les utilisateurs.'
-      : undefined
+      ? "Impossible de charger les utilisateurs."
+      : undefined,
   );
 }

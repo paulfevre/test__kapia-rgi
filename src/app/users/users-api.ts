@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { API_BASE_URL } from '../core/api-base-url';
-import type { User } from './user';
+import { HttpClient } from "@angular/common/http";
+import { Injectable, inject } from "@angular/core";
+import { Observable } from "rxjs";
+import { API_BASE_URL } from "../core/api-base-url";
+import type { User } from "./user";
 
 /**
  * Accès HTTP aux utilisateurs. Cette couche ne fait que transporter la donnée :
  * pas d'état, pas de logique de présentation.
  */
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class UsersApi {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = inject(API_BASE_URL);
