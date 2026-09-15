@@ -5,9 +5,11 @@ import {
   inject,
 } from "@angular/core";
 import { rxResource } from "@angular/core/rxjs-interop";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap/modal";
 
 import type { User } from "../user";
 import { UsersApi } from "../users-api";
+import { NgbdModalConfirm } from "./user-list-delete-modal";
 
 @Component({
   selector: "app-user-list",
@@ -18,6 +20,7 @@ import { UsersApi } from "../users-api";
 })
 export class UserList {
   private readonly usersApi = inject(UsersApi);
+  private readonly modalService = inject(NgbModal);
 
   /**
    * Chargement de la liste. `rxResource` expose la requête sous forme de
@@ -36,4 +39,17 @@ export class UserList {
       ? "Impossible de charger les utilisateurs."
       : undefined,
   );
+
+  deleteUserModal(user: User) {
+    const modalRef = this.modalService.open(NgbdModalConfirm);
+    modalRef.componentInstance.user = user;
+    modalRef.componentInstance.delete.subscribe(() => {
+      this.usersApi.delete(user.id).subscribe(() => {
+        // Suppression de la ligne de l'utilisateur
+        this.usersResource.value.update((users: readonly User[]) =>
+          users.filter((needle: User) => needle.id !== user.id),
+        );
+      });
+    });
+  }
 }

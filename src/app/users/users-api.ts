@@ -22,4 +22,9 @@ export class UsersApi {
   find(id: number): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/users/${id}`);
   }
+
+  /** `DELETE /users/:id` — Suppression d'un utilisateur. */
+  delete(id: number): Observable<User> {
+    return this.http.delete<User>(`${this.baseUrl}/users/${id}`);
+  }
 }

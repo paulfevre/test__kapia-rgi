@@ -5,7 +5,7 @@
 - [x] Initialisation du repo et du projet
 - [x] Installation des modules complémentaires (NgBootstrap)
 - [ ] Popin d'édition d'un utilisateur
-- [ ] Bouton de suppression d'un utilisateur
+- [x] Modal de suppression d'un utilisateur
 - [x] Page de détails d'un utilisateur
 - [x] Linter `npm run format:check`
 - [x] Tests `npm run test`
