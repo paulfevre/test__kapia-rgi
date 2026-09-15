@@ -17,4 +17,9 @@ export class UsersApi {
   list(): Observable<readonly User[]> {
     return this.http.get<readonly User[]>(`${this.baseUrl}/users`);
   }
+
+  /** `GET /users/:id` — Recherche d'un utilisateur. */
+  find(id: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/users/${id}`);
+  }
 }

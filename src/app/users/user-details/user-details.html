@@ -1,0 +1,60 @@
+@if (isLoading()) {
+    <div class="d-flex justify-content-center py-5" role="status">
+        <div class="spinner-border text-secondary"></div>
+        <span class="visually-hidden">Chargement de l'utilisateur…</span>
+    </div>
+} @else if (errorMessage(); as message) {
+    <div class="alert alert-danger d-flex align-items-center gap-3" role="alert">
+        <i class="bi bi-exclamation-triangle-fill fs-4" aria-hidden="true"></i>
+        <span class="flex-grow-1">{{ message }}</span>
+        <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                (click)="userResource.reload()"
+        >
+            Réessayer
+        </button>
+    </div>
+} @else if (user()) {
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/users">Utilisateurs</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ user()?.name }}
+                <small>(#{{ user()?.id }})</small>
+            </li>
+        </ol>
+    </nav>
+    <div class="card" style="width: 18rem;">
+        <img [src]="user()?.avatarUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ user()?.name }}</h5>
+            <ul class="list-group list-group-flush">
+                @if(user()?.email) {
+                    <li class="list-group-item">
+                        <span
+                                class="user-list__status-dot"
+                                [style.background-color]="user()?.color"
+                                aria-hidden="true"
+                        ></span>
+                        {{ user()?.state || '—' }}
+                    </li>
+                }
+                @if(user()?.email) {
+                    <li class="list-group-item">
+                        ✉️
+                        <a [href]="`mailto:${user()?.email}`" [title]="`${user()?.email}`">
+                            {{ user()?.email }}
+                        </a>
+                    </li>
+                }
+                @if(user()?.age) {
+                    <li class="list-group-item">
+                        🎂 {{ user()?.age }} ans
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
