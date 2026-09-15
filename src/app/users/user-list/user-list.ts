@@ -6,14 +6,13 @@ import {
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 
-import { Brief } from '../../brief/brief';
 import type { User } from '../user';
 import { UsersApi } from '../users-api';
 
 @Component({
   selector: 'app-user-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Brief],
+  imports: [],
   templateUrl: './user-list.html',
   styleUrl: './user-list.scss',
 })
