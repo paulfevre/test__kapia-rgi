@@ -6,6 +6,7 @@
 - [x] Installation des modules complémentaires (NgBootstrap)
 - [x] Popin d'édition d'un utilisateur
 - [x] Modal de suppression d'un utilisateur
+- [x] Ajout d'un fil d'Ariane
 - [x] Page de détails d'un utilisateur
 - [x] Linter `npm run format:check`
 - [x] Tests `npm run test`
@@ -13,6 +14,8 @@
 ## Remarque
 
 > Je suis surpris de voir que le `Validators.email` accepte maintenant `john@doe` comme adresse, mais c'est un changement de la norme ([wikipedia](https://en.wikipedia.org/wiki/Email_address)). **Ce n'est pas un bug du validator**.
+
+> Je n'ai pas réussi à me passer des @Input() et @Output() dans les popins, dès que je passe sur les signal, cela plante ou lag.
 
 ## Intro
 
