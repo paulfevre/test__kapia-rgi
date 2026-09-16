@@ -4,11 +4,17 @@
 
 - [x] Initialisation du repo et du projet
 - [x] Installation des modules complémentaires (NgBootstrap)
-- [ ] Popin d'édition d'un utilisateur
+- [x] Popin d'édition d'un utilisateur
 - [x] Modal de suppression d'un utilisateur
 - [x] Page de détails d'un utilisateur
 - [x] Linter `npm run format:check`
 - [x] Tests `npm run test`
+
+## Remarque
+
+> Je suis surpris de voir que le `Validators.email` accepte maintenant `john@doe` comme adresse, mais c'est un changement de la norme ([wikipedia](https://en.wikipedia.org/wiki/Email_address)). **Ce n'est pas un bug du validator**.
+
+## Intro
 
 Bienvenue, et merci du temps que vous consacrez à cet exercice.
 

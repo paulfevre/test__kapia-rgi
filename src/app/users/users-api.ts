@@ -23,6 +23,11 @@ export class UsersApi {
     return this.http.get<User>(`${this.baseUrl}/users/${id}`);
   }
 
+  /** `PUT /users/:id` — Modification d'un utilisateur. */
+  edit(user: User): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/users/${user.id}`, user);
+  }
+
   /** `DELETE /users/:id` — Suppression d'un utilisateur. */
   delete(id: number): Observable<User> {
     return this.http.delete<User>(`${this.baseUrl}/users/${id}`);

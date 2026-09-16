@@ -10,6 +10,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap/modal";
 import type { User } from "../user";
 import { UsersApi } from "../users-api";
 import { NgbdModalConfirm } from "./user-list-delete-modal";
+import { NgbdModalEdit } from "./user-list-edit-modal";
 
 @Component({
   selector: "app-user-list",
@@ -48,6 +49,21 @@ export class UserList {
         // Suppression de la ligne de l'utilisateur
         this.usersResource.value.update((users: readonly User[]) =>
           users.filter((needle: User) => needle.id !== user.id),
+        );
+      });
+    });
+  }
+
+  editUserModal(user: User) {
+    const modalRef = this.modalService.open(NgbdModalEdit);
+    modalRef.componentInstance.user = user;
+    modalRef.componentInstance.edit.subscribe((touchedUser: User) => {
+      this.usersApi.edit(touchedUser).subscribe((savedUser: User) => {
+        // Mise à jour locale de la ligne sans recharger la liste.
+        this.usersResource.value.update((users: readonly User[]) =>
+          users.map((needle: User) =>
+            needle.id === savedUser.id ? savedUser : needle,
+          ),
         );
       });
     });
