@@ -2,9 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
   inject,
 } from "@angular/core";
-import { rxResource } from "@angular/core/rxjs-interop";
+import { rxResource, takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap/modal";
 
 import type { User } from "../user";
@@ -22,6 +23,7 @@ import { NgbdModalEdit } from "./user-list-edit-modal";
 export class UserList {
   private readonly usersApi = inject(UsersApi);
   private readonly modalService = inject(NgbModal);
+  private readonly destroyRef = inject(DestroyRef);
 
   /**
    * Chargement de la liste. `rxResource` expose la requête sous forme de
@@ -44,28 +46,38 @@ export class UserList {
   deleteUserModal(user: User) {
     const modalRef = this.modalService.open(NgbdModalConfirm);
     modalRef.componentInstance.user = user;
-    modalRef.componentInstance.delete.subscribe(() => {
-      this.usersApi.delete(user.id).subscribe(() => {
-        // Suppression de la ligne de l'utilisateur
-        this.usersResource.value.update((users: readonly User[]) =>
-          users.filter((needle: User) => needle.id !== user.id),
-        );
+    modalRef.componentInstance.delete
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.usersApi
+          .delete(user.id)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(() => {
+            // Suppression de la ligne de l'utilisateur
+            this.usersResource.value.update((users: readonly User[]) =>
+              users.filter((needle: User) => needle.id !== user.id),
+            );
+          });
       });
-    });
   }
 
   editUserModal(user: User) {
     const modalRef = this.modalService.open(NgbdModalEdit);
     modalRef.componentInstance.user = user;
-    modalRef.componentInstance.edit.subscribe((touchedUser: User) => {
-      this.usersApi.edit(touchedUser).subscribe((savedUser: User) => {
-        // Mise à jour locale de la ligne sans recharger la liste.
-        this.usersResource.value.update((users: readonly User[]) =>
-          users.map((needle: User) =>
-            needle.id === savedUser.id ? savedUser : needle,
-          ),
-        );
+    modalRef.componentInstance.edit
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((touchedUser: User) => {
+        this.usersApi
+          .edit(touchedUser)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe((savedUser: User) => {
+            // Mise à jour locale de la ligne sans recharger la liste.
+            this.usersResource.value.update((users: readonly User[]) =>
+              users.map((needle: User) =>
+                needle.id === savedUser.id ? savedUser : needle,
+              ),
+            );
+          });
       });
-    });
   }
 }
